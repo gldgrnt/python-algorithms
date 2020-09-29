@@ -16,9 +16,11 @@ def max_ad_revenue(input_string, print_result=False):
     # Parse input
     amount, profit, slots = parse_input(input_string)
 
-    # Combine and multiply adjacent indeces, step 2 each time
-    combined = sorted(profit + slots, reverse=True)
-    revenue = sum([combined[i] * combined[i+1] for i in range(0, amount*2, 2)])
+    # Sort profit and slots, and sum matching indices
+    profit, slots = sorted(profit, reverse=True), sorted(slots, reverse=True)
+
+    # Sum matching indexes
+    revenue = sum([profit[i] * slots[i] for i in range(0, amount)])
 
     if print_result:
         print(f'Max revenue: {revenue}')
