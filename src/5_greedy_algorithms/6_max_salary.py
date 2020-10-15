@@ -31,7 +31,7 @@ def max_salary(input_string):
             new_result = result_list + [max_digit]
             new_integers_list = integers_list[:index] + integers_list[index+1:]
             # Recurse!
-            create_max_salary(new_integers_list, new_result)
+            return create_max_salary(new_integers_list, new_result)
 
     # Use recursive function
     salary = create_max_salary(integers) 
