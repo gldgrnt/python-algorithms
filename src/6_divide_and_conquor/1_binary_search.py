@@ -9,6 +9,7 @@ def parse_input(input_string):
     lists = [[int(j) for j in i.split(" ")] for i in split_input]
     return [lists[0][0], lists[0][1:]], [lists[1][0], lists[1][1:]]
 
+# Recursive solution
 def binary_search_recursive(input_string, print_result=True):
     # Parse the input format
     lists = parse_input(input_string)
@@ -40,3 +41,41 @@ def binary_search_recursive(input_string, print_result=True):
 
 # Test 1: 5 1 5 8 12 13\n5 8 1 23 1 11 => 2 0 -1 0 -1
 binary_search_recursive("5 1 5 8 12 13\n5 8 1 23 1 11")
+
+
+# Iterative solution
+def binary_search_iterative(input_string, print_result=True):
+    # Parse the input format
+    lists = parse_input(input_string)
+    base_length, base_list = lists[0]
+    search_length, search_list = lists[1]
+
+    def bsri(integer_list, lookup):
+        # Define variables
+        low, high = 0, len(integer_list) - 1
+        position = -1
+        # Iterate!
+        while low <= high:
+            # Calculate mid point
+            mid = math.floor((low+high)/2)
+            # Check for lookup
+            if integer_list[mid] == lookup:
+                position = mid
+                break
+            elif integer_list[mid] > lookup:
+                high = mid - 1
+            elif integer_list[mid] < lookup:
+                low = mid + 1
+        # Return position
+        return position
+
+    # Loop through items in the search list and find the result
+    result = [bsri(base_list, item) for item in search_list]
+    # Print result
+    if print_result:
+        print(" ".join([str(item) for item in result]))
+
+    return result
+
+# Test 1: 5 1 5 8 12 13\n5 8 1 23 1 11 => 2 0 -1 0 -1
+binary_search_iterative("5 1 5 8 12 13\n5 8 1 23 1 11")
