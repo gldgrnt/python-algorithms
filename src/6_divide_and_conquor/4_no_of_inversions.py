@@ -33,7 +33,7 @@ def no_of_inversions(input_string):
             else:
                 result[i] = right[r_pointer]
                 r_pointer += 1
-                # Incremenet inversions IFF a number on the RHS is smaller than the number on the LHS
+                # Increment inversions IFF a number on the RHS is smaller than the number on the LHS
                 invs += 1
         # Return sorted list'
         return result, invs
@@ -50,7 +50,7 @@ def no_of_inversions(input_string):
         # Divide and conquer!
         left_sorted, l_inversions = mergesort(left, len(left))
         right_sorted, r_inversions = mergesort(right, len(right))
-        inversions = l_inversions, r_inversions
+        inversions = l_inversions + r_inversions
 
         return merge_lists(left_sorted, right_sorted, inversions)
 
